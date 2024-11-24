@@ -9,6 +9,7 @@ from buildObj.classObj import *
 import buildObj.Constants as Constants
 from buildObj.visual_3d import *
 from buildObj.saveStoneInfo import saveStoneInfoToCSV
+from buildObj.pdfWork import create_PDF
 
 min_int_size = -max_int_size - 1
 
@@ -500,5 +501,8 @@ def main(input_path):
         calc_stone_parameters(i, kidney_key)
         list_slices_of_stones_LK.append(str(stone_param[1]))
         LS_params.append(stone_param)
+
+    # here you need to insert the output in PDF of the parameters of the stones !!!!!!
+    create_PDF(stones_dir_path, RS_params, LS_params, param_numpy)
 
     return stones_dir_path

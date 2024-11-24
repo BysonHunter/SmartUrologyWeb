@@ -6,6 +6,7 @@ opencv-python   #image processing
 numpy
 requests
 pydicom==2.3.0
+fpdf
 #plotly==5.24.1
 #------------------------------------------------
 ultralytics>=8.2.34  # https://ultralytics.com
