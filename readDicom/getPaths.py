@@ -32,7 +32,7 @@ def copyInputDirToOutputDir(source_dir, dest_dir):
 
 
 def getPaths():
-    jsonFileName = './paths.json'
+    jsonFileName = './inputPath.json'
     with open(jsonFileName) as json_file:
         data = json.load(json_file)
         dicomPath = data['dicomDirPath']

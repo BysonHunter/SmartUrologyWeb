@@ -2,7 +2,7 @@ import json
 
 
 def responseOutPaths(outputDir):
-    jsonFileName = './output.json'
+    jsonFileName = './outputPath.json'
 
     answer_json = {
         "outputDirPath": outputDir
