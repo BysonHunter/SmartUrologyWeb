@@ -3,6 +3,7 @@ import os
 from os import listdir
 from pathlib import Path
 from sys import maxsize as max_int_size
+import shutil
 
 from buildObj.Utils import *
 from buildObj.classObj import *
@@ -10,6 +11,7 @@ import buildObj.Constants as Constants
 from buildObj.visual_3d import *
 from buildObj.saveStoneInfo import saveStoneInfoToCSV
 from buildObj.pdfWork import create_PDF
+from readDicom.readDicomUtils import img_format
 
 min_int_size = -max_int_size - 1
 
@@ -412,6 +414,11 @@ def main(input_path):
 
         # visualisation
 
+        # copy image, where found this stone
+        detImgWStoneSours = detectedImagesPath + param_numpy[3] + '_' + str(med_slice) + '.' + img_format
+        detImgWStoneDest = stones_dir_path + param_numpy[3] + '_' + str(med_slice) + '.' + img_format
+        shutil.copy(detImgWStoneSours, detImgWStoneDest)
+
         # plot slic stone image
         stone_image = ds_array[z_beg:z_end, med_slice, x_beg:x_end]
         real_stone_image = cv2.resize(stone_image, frame_size_stone)
@@ -440,6 +447,7 @@ def main(input_path):
     input_path = str(input_path) + '/'
     labels_dir_path = input_path + 'detect/labels/'
     stones_dir_path = input_path + 'stones/'
+    detectedImagesPath = input_path + 'detect/'
 
     # ID = str('/' + Path(input_path).parts[3][0:4])
     # ID = gi.patient_ID
@@ -504,5 +512,4 @@ def main(input_path):
 
     # here you need to insert the output in PDF of the parameters of the stones !!!!!!
     create_PDF(stones_dir_path, RS_params, LS_params, param_numpy)
-
     return stones_dir_path

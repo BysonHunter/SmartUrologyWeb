@@ -1,6 +1,7 @@
 import os.path
 from fpdf import FPDF
 from pathlib import Path
+from readDicom.readDicomUtils import img_format
 
 
 def create_PDF(stones_dir_path, RS_params, LS_params, param_numpy):
@@ -37,6 +38,8 @@ def create_PDF(stones_dir_path, RS_params, LS_params, param_numpy):
                       ]
 
             pdf.cell(width, height, txt=f'Правая почка. Камень № {stone + 1}', ln=1, align="L")
+            detImgWStoneDest = stones_dir_path + param_numpy[3] + '_' + str(RS_params[stone][1]) + '.' + img_format
+            pdf.image(detImgWStoneDest, w=100, h=100)
             pdf.image(stones_dir_path + '/stone_rk_' + str(stone) + '.png', w=50, h=50)
             x_pos = pdf.get_x()
             y_pos = pdf.get_y()
@@ -64,6 +67,8 @@ def create_PDF(stones_dir_path, RS_params, LS_params, param_numpy):
                       ]
 
             pdf.cell(width, height, txt=f'Левая почка. Камень № {stone + 1}', ln=1, align="L")
+            detImgWStoneDest = stones_dir_path + param_numpy[3] + '_' + str(LS_params[stone][1]) + '.' + img_format
+            pdf.image(detImgWStoneDest, w=100, h=100)
             pdf.image(stones_dir_path + '/stone_lk_' + str(stone) + '.png', w=50, h=50)
             x_pos = pdf.get_x()
             y_pos = pdf.get_y()
